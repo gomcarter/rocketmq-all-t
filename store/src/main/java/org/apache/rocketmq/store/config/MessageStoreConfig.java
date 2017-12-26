@@ -16,9 +16,10 @@
  */
 package org.apache.rocketmq.store.config;
 
-import java.io.File;
 import org.apache.rocketmq.common.annotation.ImportantField;
 import org.apache.rocketmq.store.ConsumeQueue;
+
+import java.io.File;
 
 public class MessageStoreConfig {
     //The root directory in which the log data is kept
@@ -142,6 +143,23 @@ public class MessageStoreConfig {
     private boolean transientStorePoolEnable = false;
     private int transientStorePoolSize = 5;
     private boolean fastFailIfNoBufferInStorePool = false;
+
+    /**
+     * the max of transaction log accumulate size - per producer group
+     */
+    private int transactionLogAccumulateSize = 100000;
+    private int transactionAsyncPoolSize = 16;
+    private String transactionStoreType = "NONE";
+    private int checkScheduleIntervalSeconds = 10;
+    private int checkPageSize = 20;
+    private int checkTransactionLogSecondsBefore = 120;
+    private int dbTransactionLogAccumulateSize = 2000;
+
+    /**
+     * TDDL config
+     */
+    private String appName;
+    private String dbGroupKey;
 
     public boolean isDebugLockEnable() {
         return debugLockEnable;
@@ -666,4 +684,75 @@ public class MessageStoreConfig {
         this.commitCommitLogThoroughInterval = commitCommitLogThoroughInterval;
     }
 
+    public int getTransactionLogAccumulateSize() {
+        return transactionLogAccumulateSize;
+    }
+
+    public void setTransactionLogAccumulateSize(int transactionLogAccumulateSize) {
+        this.transactionLogAccumulateSize = transactionLogAccumulateSize;
+    }
+
+    public int getTransactionAsyncPoolSize() {
+        return transactionAsyncPoolSize;
+    }
+
+    public void setTransactionAsyncPoolSize(int transactionAsyncPoolSize) {
+        this.transactionAsyncPoolSize = transactionAsyncPoolSize;
+    }
+
+    public String getTransactionStoreType() {
+        return transactionStoreType;
+    }
+
+    public void setTransactionStoreType(String transactionStoreType) {
+        this.transactionStoreType = transactionStoreType;
+    }
+
+    public int getCheckScheduleIntervalSeconds() {
+        return checkScheduleIntervalSeconds;
+    }
+
+    public void setCheckScheduleIntervalSeconds(int checkScheduleIntervalSeconds) {
+        this.checkScheduleIntervalSeconds = checkScheduleIntervalSeconds;
+    }
+
+    public int getCheckPageSize() {
+        return checkPageSize;
+    }
+
+    public void setCheckPageSize(int checkPageSize) {
+        this.checkPageSize = checkPageSize;
+    }
+
+    public int getCheckTransactionLogSecondsBefore() {
+        return checkTransactionLogSecondsBefore;
+    }
+
+    public void setCheckTransactionLogSecondsBefore(int checkTransactionLogSecondsBefore) {
+        this.checkTransactionLogSecondsBefore = checkTransactionLogSecondsBefore;
+    }
+
+    public int getDbTransactionLogAccumulateSize() {
+        return dbTransactionLogAccumulateSize;
+    }
+
+    public void setDbTransactionLogAccumulateSize(int dbTransactionLogAccumulateSize) {
+        this.dbTransactionLogAccumulateSize = dbTransactionLogAccumulateSize;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public String getDbGroupKey() {
+        return dbGroupKey;
+    }
+
+    public void setDbGroupKey(String dbGroupKey) {
+        this.dbGroupKey = dbGroupKey;
+    }
 }

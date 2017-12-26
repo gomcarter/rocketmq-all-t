@@ -29,7 +29,7 @@
     <inceptionYear>2012</inceptionYear>
     <groupId>org.apache.rocketmq</groupId>
     <artifactId>rocketmq-all</artifactId>
-    <version>4.2.0</version>
+    <version>4.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Apache RocketMQ ${project.version}</name>
     <url>http://rocketmq.apache.org/</url>
@@ -100,8 +100,8 @@
         <maven.test.skip>false</maven.test.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <!-- Compiler settings properties -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <!-- Exclude all generated code -->
         <sonar.jacoco.itReportPath>${project.basedir}/../test/target/jacoco-it.exec</sonar.jacoco.itReportPath>
@@ -123,8 +123,8 @@
         <module>srvutil</module>
         <module>filter</module>
         <module>test</module>
-        <module>distribution</module>
         <module>openmessaging</module>
+        <module>distribution</module>
     </modules>
 
     <build>
@@ -223,26 +223,26 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-                <executions>
-                    <execution>
-                        <id>verify</id>
-                        <phase>verify</phase>
-                        <configuration>
-                            <configLocation>style/rmq_checkstyle.xml</configLocation>
-                            <encoding>UTF-8</encoding>
-                            <consoleOutput>true</consoleOutput>
-                            <failsOnError>true</failsOnError>
-                            <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                        </configuration>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+                <!--<version>2.17</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>verify</id>-->
+                        <!--<phase>verify</phase>-->
+                        <!--<configuration>-->
+                            <!--<configLocation>style/rmq_checkstyle.xml</configLocation>-->
+                            <!--<encoding>UTF-8</encoding>-->
+                            <!--<consoleOutput>true</consoleOutput>-->
+                            <!--<failsOnError>true</failsOnError>-->
+                            <!--<includeTestSourceDirectory>false</includeTestSourceDirectory>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>check</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -598,6 +598,39 @@
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>2.7</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.taobao.tddl</groupId>
+                <artifactId>tddl-matrix</artifactId>
+                <version>5.1.7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.taobao.tddl</groupId>
+                <artifactId>tddl-config-diamond</artifactId>
+                <version>5.1.7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.taobao.tddl</groupId>
+                <artifactId>tddl-repo-mysql</artifactId>
+                <version>5.1.7-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <site>
+            <id>website</id>
+            <url>scp://webhost.company.com/www/website</url>
+        </site>
+        <repository>
+            <id>releases</id>
+            <name>JP Releases</name>
+            <url>http://maven.66buy.com.cn:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>JP Snapshots</name>
+            <url>http://maven.66buy.com.cn:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

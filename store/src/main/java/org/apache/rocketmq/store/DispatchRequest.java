@@ -35,6 +35,11 @@ public class DispatchRequest {
     private final Map<String, String> propertiesMap;
     private byte[] bitMap;
 
+    /**
+     * for transaction
+     */
+    private final String producerGroup;
+
     public DispatchRequest(
         final String topic,
         final int queueId,
@@ -47,7 +52,8 @@ public class DispatchRequest {
         final String uniqKey,
         final int sysFlag,
         final long preparedTransactionOffset,
-        final Map<String, String> propertiesMap
+        final Map<String, String> propertiesMap,
+        final String producerGroup
     ) {
         this.topic = topic;
         this.queueId = queueId;
@@ -63,6 +69,8 @@ public class DispatchRequest {
         this.preparedTransactionOffset = preparedTransactionOffset;
         this.success = true;
         this.propertiesMap = propertiesMap;
+
+        this.producerGroup = producerGroup;
     }
 
     public DispatchRequest(int size) {
@@ -79,6 +87,8 @@ public class DispatchRequest {
         this.preparedTransactionOffset = 0;
         this.success = false;
         this.propertiesMap = null;
+
+        this.producerGroup = null;
     }
 
     public DispatchRequest(int size, boolean success) {
@@ -95,6 +105,8 @@ public class DispatchRequest {
         this.preparedTransactionOffset = 0;
         this.success = success;
         this.propertiesMap = null;
+
+        this.producerGroup = null;
     }
 
     public String getTopic() {
@@ -155,5 +167,9 @@ public class DispatchRequest {
 
     public void setBitMap(byte[] bitMap) {
         this.bitMap = bitMap;
+    }
+
+    public String getProducerGroup() {
+        return producerGroup;
     }
 }
